@@ -134,5 +134,15 @@ def _print_table_products(list_products):
     print(table)
     print('Pulsa cualquier letra para continuar')
     command = input()
+def check_contact_data(message, data_name, force = True):
+    input_data = input
+    if not force and not input_data:
+        return
+    try:
+        getattr(validator, f'validate{data_name.capitalize()}')(input_data)
+        return input_data
+    except ValueError as err:
+        print(err)
+        check_contact_data(message, data_name)
 if __name__ == "__main__":
     run()
