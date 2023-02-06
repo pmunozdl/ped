@@ -82,3 +82,17 @@ class DBProductos(DBbyCSV):
             object_products.append(c)
 
         return object_products
+
+    def search_products(self, filters):
+        if 'NOMBRE' not in filters:
+            raise ValueError('Debes envíar al menos un filtro')
+
+        list_products = self.get_by_filters(filters)
+        return self._create_object_products(list_products)
+
+    def update_product(self, id_product, data):
+        if not id_product:
+            raise ValueError('Debes enviar el id del contacto')
+        if not data:
+            raise ValueError('Debes enviar al menos un parámetro a actualizar')
+        self.update(id_product, data)

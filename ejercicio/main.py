@@ -29,13 +29,13 @@ def run():
         list_products()
     #modificar
     elif command == 'M':
-        pass
+        update_product()
     #borrar
     elif command == 'E':
         pass
     #buscar
     elif command == 'B':
-        search_products()
+        search_product()
     elif command == 'S':
         os._exit(1)
     else:
@@ -100,31 +100,29 @@ def list_products():
     print('Pulsa intro para salir')
     command = input()
 
-    def search_contact():
-        #no funciona filters
+def search_product():
         filters = {}
-    print('Introduce un nombre (vacío para usar otro filtro):')
-    nombre = input()
-    if nombre:
-        filters['NOMBRE'] = nombre
-    print('Introduce un apellido (vacío para usar otro filtro):')
-    precio = input()
-    if precio:
-        filters['PRECIO'] = precio
+        print('Introduce un nombre (vacío para usar otro filtro):')
+        nombre = input()
+        if nombre:
+            filters['NOMBRE'] = nombre
+        precio = input()
+        if precio:
+            filters['PRECIO'] = precio
 
-    try:
-        list_contacts = db.search_contacts(filters)
-        if not list_contacts:
-            return print('No hay ningún contacto con esos criterios de búsqueda')
+        try:
+            list_products = db.search_(filters)
+            if not list_products:
+                return print('No hay ningún contacto con esos criterios de búsqueda')
 
-        _print_table_contacts(list_contacts)
-    except ValueError as err:
-        print(err)
-        time.sleep(1)
-        search_contact()
+            _print_table_products(list_products)
+        except ValueError as err:
+            print(err)
+            time.sleep(1)
+            search_product()
 
 
-def _print_table_contacts(list_products):
+def _print_table_products(list_products):
     table = (db.get_schema().keys())
     for product in list_products:
         table.add_row([
