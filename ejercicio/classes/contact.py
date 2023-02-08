@@ -13,7 +13,7 @@ class Contact:
         return self._id_contact
 
     @id_contact.setter
-    def id_contact(self, name):
+    def id_contact(self, id_contact):
         self._id_contact = id_contact
 
     @property
